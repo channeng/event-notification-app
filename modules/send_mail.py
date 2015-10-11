@@ -16,7 +16,7 @@ class Gmailer(object):
     self.search = search
     
     categories = {}
-    with open(os.path.abspath("Event_notif_app/modules/event_categories.csv"),'r') as f:
+    with open(os.path.abspath("event-notification-app/modules/event_categories.csv"),'r') as f:
       reader = csv.reader(f)
       for row in reader:
         categories[row[1]]=row[0]
