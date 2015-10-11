@@ -46,11 +46,11 @@ class Gmailer(object):
     # Create message container - the correct MIME type is multipart/alternative.
     message = MIMEMultipart('alternative')
     message['Subject'] = "Upcoming Events for the weekend!"
-    message['From'] = "Shannon Chan"
+    message['From'] = "Sandeep"
     message['To'] = ", ".join(to_who)
 
     # Create the body of the message (a plain-text and an HTML version).
-    text = "No text version generated"
+    text = "Events for the weekend - found"
     html = str(Generate_html(self.search,self.free_paid,self.category,self.period,self.city).generate_html())
 
     # Record the MIME types of both parts - text/plain and text/html.
@@ -63,16 +63,16 @@ class Gmailer(object):
     
     message.attach(part1)
     message.attach(part2)
-    print "Attached message"
+    # print "Attached message"
     # Prepare actual message
     # message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
     #     """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
     try:
-      print "Connecting to SMTP"
-      server = smtplib.SMTP("smtp.gmail.com:587")
-      print "Connected. Establishing ping.."
+      # print "Connecting to SMTP"
+      server = smtplib.SMTP('smtp.gmail.com',587) #587
+      # print "Connected. Establishing ping.."
       server.ehlo()
-      print "ehlo"
+      # print "ehlo"
       server.starttls()
       server.login(gmail_user, gmail_pwd)
       server.sendmail(gmail_user, recipients, message.as_string())
