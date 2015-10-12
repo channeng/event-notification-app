@@ -16,11 +16,11 @@ class Gmailer(object):
     self.search = search
     
     categories = {}
-    with open(os.path.abspath("event-notification-app/modules/event_categories.csv"),'r') as f:
+    with open(os.path.abspath("event_notification_app/modules/event_categories.csv"),'r') as f:
       reader = csv.reader(f)
       for row in reader:
         categories[row[1]]=row[0]
-    categories_id = user_preferences.category_id.split(",")
+    categories_id = user_preferences.category_id#.split(",") No need split now since category_id is [110,111,etc.]
     list_of_categories = []
     for i in categories_id:
       list_of_categories += [categories[i]]
