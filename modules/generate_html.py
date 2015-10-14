@@ -4,7 +4,8 @@ import sys
 import os
 
 class Generate_html(object):
-  def __init__(self,search,free_paid,category,period,city):
+  def __init__(self,search,free_paid,category,period,city,first_name):
+    self.first_name = first_name
     self.email_title = "Upcoming Events in " + city
     self.subtitle = free_paid+ ' events ' + period +': ' + category
     self.table_title = "Free events"
@@ -20,6 +21,10 @@ class Generate_html(object):
   
   
   # Generate HTML functions
+  def generate_greetings(self):
+    return '''
+    <p>Hi '''+self.first_name+",</p>"
+
   def generate_header(self):
     return '''
     <h4 style="display: block;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;font-size: 16px;font-style: normal;font-weight: bold;line-height: 100%;letter-spacing: normal;margin-top: 0;margin-right: 0;margin-bottom: 0;margin-left: 0;text-align: left;color: #4A4A4A !important;">'''+self.subtitle+'''</h4>
@@ -61,8 +66,7 @@ class Generate_html(object):
 
   def generate_html(self):
     if len(self.search_results) == 0:
-      print 'Events Report - NO search results found ' + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-      exit()
+      pass
     else:
       return '''<!DOCTYPE html>
       <html>
@@ -497,6 +501,7 @@ class Generate_html(object):
       <br>
 
       '''\
+    +self.generate_greetings()\
     +self.generate_header()\
     +self.generate_summary()\
     +self.generate_table()\

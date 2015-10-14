@@ -16,7 +16,7 @@ class Methods(object):
     events = eventbrite.event_search(**{
         'venue.city': preferences.venue_city,
         'price' : preferences.price, 
-        'categories' : preferences.category_id,
+        'categories' : ",".join(preferences.category_id),
         'start_date.keyword': preferences.start_date_keyword
       })
     list_of_events = []
