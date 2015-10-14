@@ -7,7 +7,8 @@ class Generate_html(object):
   def __init__(self,search,free_paid,category,period,city,first_name):
     self.first_name = first_name
     self.email_title = "Upcoming Events in " + city
-    self.subtitle = free_paid+ ' events ' + period +': ' + category
+    self.subtitle = 'Check out '+free_paid.lower()+ ' events happening ' + period +'!'
+    self.areas_of_interest = category
     self.table_title = "Free events"
     self.header_list = ['Event','Name','Description','Start','To','Link']
     self.search_results = []
@@ -27,13 +28,14 @@ class Generate_html(object):
 
   def generate_header(self):
     return '''
-    <h4 style="display: block;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;font-size: 16px;font-style: normal;font-weight: bold;line-height: 100%;letter-spacing: normal;margin-top: 0;margin-right: 0;margin-bottom: 0;margin-left: 0;text-align: left;color: #4A4A4A !important;">'''+self.subtitle+'''</h4>
+    <p style="display: block;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;font-size: 16px;font-style: normal;font-weight: bold;line-height: 100%;letter-spacing: normal;margin-top: 0;margin-right: 0;margin-bottom: 0;margin-left: 0;text-align: left;color: #4A4A4A !important;">'''+self.subtitle+'''</p>
     '''
 
   def generate_summary(self):
     total_all = len(self.search_results)
     return '''
-    <p>Total: '''+str(total_all)+''' events found on Eventbrite</p>
+    <p><b>Areas of Interest:</b> '''+self.areas_of_interest+'''</p>
+    <p><b>Total:</b> '''+str(total_all)+''' events found</p>
     '''
 
   def generate_table_headers(self):
